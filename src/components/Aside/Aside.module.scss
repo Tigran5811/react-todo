@@ -1,38 +1,8 @@
 .aside {
-    background-color: bisque;
-    margin-left: -400px;
-    float: left;
-    animation-duration: 0.7s;
-    animation-timing-function: linear;
-    padding: 100px 60px;
+    background-color: rgb(236, 235, 235);
+    padding: 30px 10px;
     height: 100vh;
-    width: 400px;
+    width: 300px;
     position: sticky;
-    top:0;
-}
-
-
-
-@keyframes circle {
-
-    0% {
-        margin-left: -400px;
-    }
-
-    50% {
-        margin-left: -200px;
-    }
-
-    100% {
-        margin-left: 0;
-    }
-}
-
-.open {
-    animation-name: circle;
-    margin-left: 0;
-}
-
-.close {
-    margin-left: -400px;
+    top: 0;
 }

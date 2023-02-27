@@ -5,7 +5,7 @@ import styles from './Button.module.scss';
 const cx = classNames.bind(styles);
 
 export const Button = ({
-  text, type, onClick, disabled,
+  text, type, onClick, disabled, buttonRef,
 }) => (
-  <button disabled={disabled} onClick={onClick} className={cx('button', { disabled })} type={type}>{text}</button>
+  <button ref={buttonRef} disabled={disabled} onClick={onClick} className={cx('button', { disabled })} type={type}>{text}</button>
 );
