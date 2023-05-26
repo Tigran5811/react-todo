@@ -1,40 +1,44 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import { SvgStar } from '../../pages/Tasks/assets/icons/svg';
+import { useDispatch } from 'react-redux';
+import { SvgStar } from './assets/icons/svg';
 import styles from './TodoList.module.scss';
+import { addTodoCompleted, addTodoImportant, removeTodo } from '../../redux/actions/todo';
 
 const cx = classNames.bind(styles);
 
 const TodoList = ({
-  remove, todos, onImportant, onCompleted,
+  todos,
 }) => {
-  const onRemove = (id) => {
-    remove(id);
+  const dispatch = useDispatch();
+
+  const remove = (id) => {
+    dispatch(removeTodo(id));
+  };
+  const onImportant = (id) => {
+    dispatch(addTodoImportant(id));
+  };
+  const onCompleted = (id) => {
+    dispatch(addTodoCompleted(id));
   };
 
-  const addToImportant = (id) => {
-    onImportant(id);
-  };
-  const addToCompleted = (id) => {
-    onCompleted(id);
-  };
   return (
     <div className={styles.container}>
       <div className={styles.list_task}>
         {todos.map(({
-          text, id, isCompleted, isImportant,
-        }) => !isCompleted && (
+          text, id, isImportant, isCompleted,
+        }) => (
           <div className={cx('icon', { checked: isImportant })} key={id}>
             <div>
               <input
-                onChange={() => addToCompleted(id)}
+                onChange={() => onCompleted(id)}
                 type="checkbox"
               />
-              <h2>{text}</h2>
+              <h2 className={cx({ done: isCompleted })}>{text}</h2>
             </div>
             <div>
-              <SvgStar onClick={() => addToImportant(id)} />
-              <button type="button" onClick={() => onRemove(id)}>X</button>
+              <SvgStar isImportant={isImportant} onClick={() => onImportant(id)} />
+              <button type="button" onClick={() => remove(id)}>X</button>
             </div>
           </div>
         ))}
